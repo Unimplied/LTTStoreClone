@@ -5,7 +5,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const cors = require('cors');
 const session = require('express-session');
-const MongoDBStore = require("connect-mongo")(session);
+const mongoDBStore = require('connect-mongo');
 require('dotenv').config();
 
 // import routes
@@ -40,25 +40,20 @@ mongoose.connect(process.env.DB_URL, {  // Database Connection
     console.log('Database connected: Welcome to MongoDB Atlas!')
 });
 
-const store = new MongoDBStore({
-    url: process.env.DB_URL,
-    secret: storeSecret,
-    touchAfter: 24 * 3600 //touch after 1 day
-});
-
 
 //Session initialization
 
 app.use(session({   // generates session cookie
-    store,
     secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: false,
     cookie: {
         httpOnly: true,
         maxAge: 3600000
-    }
- // storing sessions in mongoDB
+    },
+    store : MongoStore.create({
+        mongoUrl: process.env.DB_URL
+    })  // storing sessions in mongoDB
 }));
 
 // ::::::::::::::::::: ROUTES ::::::::::::::::::::::
