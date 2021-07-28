@@ -41,7 +41,7 @@ mongoose.connect(process.env.DB_URL, {  // Database Connection
 });
 
 const store = new MongoDBStore({
-    url: dbUrl,
+    url: process.env.DB_URL,
     secret: storeSecret,
     touchAfter: 24 * 3600 //touch after 1 day
 });
