@@ -14,11 +14,11 @@ phases:
     commands:
       -echo Build complete on `date`
 # Include only the files required for your application to run.
-  artifacts:
-    files:
-    - app.js
-    - middleware.js
-    - package.json
-    - controllers/**/*
-    - models/**/*
-    - routes/**/*
+artifacts:
+  files:
+  - app.js
+  - middleware.js
+  - package.json
+  - controllers/**/*
+  - models/**/*
+  - routes/**/*
