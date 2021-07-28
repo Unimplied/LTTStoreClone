@@ -5,14 +5,14 @@ phases:
       nodejs: 12
   pre_build:
     commands:
-      -echo Installing source NPM dependencies...
-      -npm install
+      - echo Installing source NPM dependencies...
+      - npm install
   build:
     commands:
-      -echo Build started on `date`
+      - echo Build started on `date`
   post_build:
     commands:
-      -echo Build complete on `date`
+      - echo Build complete on `date`
 # Include only the files required for your application to run.
 artifacts:
   files:
