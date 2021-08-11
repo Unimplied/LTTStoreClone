@@ -12,7 +12,7 @@ router.route('/login')
     .post(passport.authenticate('local'), user.loginUser)
 
 router.route('/myAccount/:id')
-    .get(user.getUser)
+//     .get(user.getUser)
     .put(user.updateUser)
 
 router.get('/logout', user.logoutUser);
