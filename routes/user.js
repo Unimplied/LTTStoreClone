@@ -11,6 +11,10 @@ router.get('/verify-email', user.verifyUser);
 router.route('/login')
     .post(passport.authenticate('local'), user.loginUser)
 
+router.route('/myAccount/:id')
+    .get(user.getUser)
+    .put(user.updateUser)
+
 router.get('/logout', user.logoutUser);
 
 module.exports = router;
