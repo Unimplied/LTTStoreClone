@@ -5,12 +5,17 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const cors = require('cors');
 const session = require('express-session');
-const mongoDBStore = require('connect-mongo');
+const path = require('path');
+
 require('dotenv').config();
+
 
 // import routes
 const userRoutes = require('./routes/user');
 const productRoutes = require('./routes/product');
+const imageUpload = require('./routes/imageUpload');
+const orderRoutes = require('./routes/orderRoutes');
+
 const MongoStore = require('connect-mongo');
 
 const app = express();
@@ -60,6 +65,10 @@ app.use(session({   // generates session cookie
 
 app.use('/api/v1/users',userRoutes);
 app.use('/api/v1/products',productRoutes);
+app.use('/api/v1/upload',imageUpload);
+app.use('/api/v1/orders', orderRoutes);
+
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 app.listen(port, ()=> {
     console.log(`App running on port: ${port}`);
