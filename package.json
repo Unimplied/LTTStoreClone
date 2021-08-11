@@ -1,9 +1,9 @@
 {
   "name": "merchie",
   "version": "1.0.0",
-  "main": "App.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node App.js"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
