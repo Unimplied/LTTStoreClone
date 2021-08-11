@@ -57,19 +57,49 @@ module.exports.verifyUser = async(req, res, next) => {
     });
 };
 
+module.exports.getUser = async(req, res) => {
+    const user = await User.findById(req.params.id);
+
+    if (user) {
+        res.status(200).json({
+            message: user
+        })
+    } else {
+        res.status(500).json({ message: 'Could not find user'});
+    }
+}
+
+module.exports.updateUser = async(req, res) => {
+    const user = await User.findById(req.params.id);
+
+    let newPass = req.body.password;
+
+    if (user) {
+        if(newPass){
+            user.setPassword(newPass, function(err, user){
+            user.save();    
+            });    
+        }
+        res.status(200).json({
+            message: 'User updated'
+        })
+    } else {
+        res.status(500).json({ message: 'Could not find user'});
+    }
+}
+
 module.exports.loginUser = async (req, res) => {
     try {
-        res.status(200).json( { username:req.user.username , isAdmin: req.user.isAdmin } );
+        res.status(200).json( { message: 'You have been signed in', username:req.user.username , isAdmin: req.user.isAdmin, id: req.user._id } );
     } catch (err) {
         res.status(500).json({ message: err});
     }
-
 };
 
 module.exports.logoutUser = (req, res) => {
     try {
         req.session.destroy();
-        res.status(200).json({message:'Logged out'})
+        res.status(200).json({message:'You have been logged out'})
     }   catch (err) {
         res.status(500).json({ message: err});
     }

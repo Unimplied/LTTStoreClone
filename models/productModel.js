@@ -17,7 +17,7 @@ const productSchema = new Schema({
     rating: {type: Number, required: true, default: 0},
     numReviews: {type: Number, required: true, default: 0},
     countInStock: {type: Number, required: true, default: 0},
-    image: {type: String, required: true,},
+    image: {type: String, required: true},
     // user: {
     //     type: Schema.Types.ObjectId,
     //     required: true,
